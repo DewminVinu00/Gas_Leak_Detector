@@ -1,3 +1,5 @@
+// IOT Project
+
 #include <LiquidCrystal_I2C.h>       
 LiquidCrystal_I2C lcd(0x27,16,2);
 
@@ -21,33 +23,4 @@ void setup() {
  lcd.setCursor(1,1);
  lcd.print("IOT Project"); 
  delay(5000);     
-}
-
-void loop() {
-  int analogSensor = analogRead(GASA0);
-  int gasvalue=(analogSensor-50)/10;
-  
-  lcd.setCursor(0,0);
-  lcd.print("GAS Level: ");
-  lcd.setCursor(10,0);
-  lcd.print(gasvalue);
-  lcd.setCursor(12,0);
-  lcd.print("%");
-  
-  // Checks if it has reached the threshold value
-  if (gasvalue >= 10)
-  {
-    SendTextMessage();
-    lcd.setCursor(0,1);
-    lcd.print("DANGER");
-    tone(buzzer, 1000, 200);
-  }
-  else
-  {
-    lcd.setCursor(0,1);
-    lcd.print("NORMAL");
-    noTone(buzzer);
-  }
-  delay(500);
-  lcd.clear();
 }
